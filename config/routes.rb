@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: 'movie#home'
+  post '/search', to: 'movie#search', as: :search_movie
+  post '/nomination', to: 'movie#nomination', as: :nominate_movie
+  post '/delete', to: 'movie#delete', as: :delete_nomination
 end
