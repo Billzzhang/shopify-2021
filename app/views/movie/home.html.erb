@@ -4,77 +4,68 @@
             <p class="text-4xl font-bold">The Boppies</p>
         </div>
 
-        <!--- Search Section --->
-        <div class="border rounded shadow flex-grow bg-white">
-            <div class="py-6 px-8">
-                <div>
-                    <p class="text-xl font-normal">Movie Title</p>
-                </div>
-                <%= form_tag search_movie_path, class: 'pt-2' do |form| %>
-                    <div class="border rounded flex">
-                        <div class="flex py-2 pl-2">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="flex">  
+
+            <div class="flex flex-col w-1/2 pr-3">
+                <!--- Search Section --->
+                <div class="border rounded shadow bg-white">
+                    <div class="py-6 px-8">
+                        <div>
+                            <p class="text-xl font-normal">Movie Title</p>
                         </div>
-                        <%= text_field_tag :movie, "", class: "w-full h-10 pl-2", placeholder: "Movie" %>
+                        <div class="pt-2 border rounded flex">
+                            <div class="flex py-2 pl-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </div>
+                            <input type="text" id="searchMovieText" name="fname" class="w-full h-10 pl-2"> 
+                        </div>
+                        <div class="flex w-1/6 mt-3 pt-2">
+                            <button type="button" id="searchMovieButton" class="w-full text-lg bg-black border border-black rounded-xl text-green-400 font-extrabold"> Search </button>
+                        </div>
                     </div>
-                    <div class="flex w-full mt-3 pt-2">
-                        <%= submit_tag "Search", class: "w-full bg-blue-200 border border-blue-400 rounded-xl text-yellow-600 font-bold" %>
-                    </div>
-                <% end %>
-            </div>
-        </div>
-        
-        <div class="flex pt-8">
-            <!--- Found section --->
-            <% if @found_movies%>
-                <div class="w-6/12 pr-4">
+                </div>
+
+                <!--- Nomination Section --->
+                <div class="pt-6">
                     <div class="border shadow rounded bg-white">
                         <div class="py-6 px-8">
-                            <p class="font-semibold text-xl"> Results for "<%= @search_input %>"</p>
-
+                            <p class="font-semibold text-xl"> Nominations</p>
                             <div class="table w-full pl-8 pt-4">
                                 <div class="table-row-group">
                                     <% @movies.each do |movie| %>
                                         <div class="table-row">
                                             <div class="table-cell py-1 float-left"><%=movie%></div>
                                             <div class="table-cell py-1 float-right">
-                                                <%=form_tag nominate_movie_path do |form|%>
+                                                <%=form_tag delete_nomination_path do |form|%>
                                                     <%= hidden_field_tag 'movie', movie%>
                                                 <% end %>
-                                                <%= submit_tag "Nominate", class: "border rounded px-1 py-1 bg-grey-300"%>
+                                                <%= submit_tag "Remove", class: "border rounded px-1 py-1 bg-grey-300"%>
                                             </div>
                                         </div>
                                     <% end %>
                                 </div>
                             </div>
-                        </div>
+                        </div>                    
                     </div>
                 </div>
-            <% end %>
+            </div>
 
-            <!--- Nomination Section --->
-            <div class="w-6/12 pl-4">
+            <!--- Found section --->
+            <div id="searchSection" class="w-6/12 pl-3 invisible">
                 <div class="border shadow rounded bg-white">
                     <div class="py-6 px-8">
-                        <p class="font-semibold text-xl"> Nominations</p>
+                        <p id="searchResult" class="font-semibold text-4xl"> Results for "Placeholder"</p>
+
                         <div class="table w-full pl-8 pt-4">
                             <div class="table-row-group">
-                                <% @movies.each do |movie| %>
-                                    <div class="table-row">
-                                        <div class="table-cell py-1 float-left"><%=movie%></div>
-                                        <div class="table-cell py-1 float-right">
-                                            <%=form_tag delete_nomination_path do |form|%>
-                                                <%= hidden_field_tag 'movie', movie%>
-                                            <% end %>
-                                            <%= submit_tag "Remove", class: "border rounded px-1 py-1 bg-grey-300"%>
-                                        </div>
-                                    </div>
-                                <% end %>
+                                <ul id="searchList">
+                                </ul>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<%= javascript_pack_tag 'home' %>
