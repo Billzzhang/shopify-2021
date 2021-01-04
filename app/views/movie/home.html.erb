@@ -6,21 +6,23 @@
 
         <div class="flex">  
 
-            <div class="flex flex-col w-1/2 pr-3">
+            <div class="flex flex-col w-1/3 pr-3">
                 <!--- Search Section --->
                 <div class="border rounded shadow bg-white">
                     <div class="py-6 px-8">
                         <div>
                             <p class="text-xl font-normal">Movie Title</p>
                         </div>
-                        <div class="pt-2 border rounded flex">
-                            <div class="flex py-2 pl-2">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <div class="pt-2">
+                            <div class="border rounded flex">
+                                <div class="flex py-2 pl-2">
+                                    <i class="fas fa-search text-green-400"></i>
+                                </div>
+                                <input type="text" id="searchMovieText" name="fname" class="w-full h-10 pl-2"> 
                             </div>
-                            <input type="text" id="searchMovieText" name="fname" class="w-full h-10 pl-2"> 
-                        </div>
-                        <div class="flex w-1/6 mt-3 pt-2">
-                            <button type="button" id="searchMovieButton" class="w-full text-lg bg-black border border-black rounded-xl text-green-400 font-extrabold"> Search </button>
+                            <div class="flex w-1/4 mt-3 pt-2">
+                                <button type="button" id="searchMovieButton" class="w-full text-lg border border-green-400 rounded-xl text-green-400 font-bold"> Search </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,20 +31,11 @@
                 <div class="pt-6">
                     <div class="border shadow rounded bg-white">
                         <div class="py-6 px-8">
-                            <p class="font-semibold text-xl"> Nominations</p>
+                            <p class="font-semibold text-2xl"> Nominations</p>
                             <div class="table w-full pl-8 pt-4">
                                 <div class="table-row-group">
-                                    <% @movies.each do |movie| %>
-                                        <div class="table-row">
-                                            <div class="table-cell py-1 float-left"><%=movie%></div>
-                                            <div class="table-cell py-1 float-right">
-                                                <%=form_tag delete_nomination_path do |form|%>
-                                                    <%= hidden_field_tag 'movie', movie%>
-                                                <% end %>
-                                                <%= submit_tag "Remove", class: "border rounded px-1 py-1 bg-grey-300"%>
-                                            </div>
-                                        </div>
-                                    <% end %>
+                                    <ul id="nominationList">
+                                    </ul>
                                 </div>
                             </div>
                         </div>                    
@@ -51,10 +44,10 @@
             </div>
 
             <!--- Found section --->
-            <div id="searchSection" class="w-6/12 pl-3 invisible">
+            <div id="searchSection" class="w-2/3 pl-3 invisible">
                 <div class="border shadow rounded bg-white">
                     <div class="py-6 px-8">
-                        <p id="searchResult" class="font-semibold text-4xl"> Results for "Placeholder"</p>
+                        <p id="searchResult" class="font-semibold text-3xl"> Results for "Placeholder"</p>
 
                         <div class="table w-full pl-8 pt-4">
                             <div class="table-row-group">
