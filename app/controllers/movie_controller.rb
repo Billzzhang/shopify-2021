@@ -1,9 +1,6 @@
 class MovieController < ApplicationController
 
   def home
-    @found_movies = true
-    @search_input = "Example"
-    @movies = ["Movie 1", "Movie 2"]
   end
 
   def search
@@ -16,11 +13,5 @@ class MovieController < ApplicationController
     response = HTTParty.get(url)
 
     render json: response
-  end
-
-  def nomination
-  end
-
-  def delete
   end
 end
